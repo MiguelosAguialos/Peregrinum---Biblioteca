@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="usuariosForm" novalidate>
+    <ion-item>
+      <ion-label position="floating">Nome:</ion-label>
+      <ion-input formControlName="nome_user" [(ngModel)]="usuarios.nome_user"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Idade:</ion-label>
+      <ion-input formControlName="idade" [(ngModel)]="usuarios.idade"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select (ionChange)="selecionarSerie($event)" formControlName="serie" placeholder="Série">
+        <ion-select-option *ngFor="let serie of series" [value]="serie">
+          {{serie.nome}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="cadastrarUsuario()">Cadastrar</ion-button>
+  </form>
+</ion-content>
+

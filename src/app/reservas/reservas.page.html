@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form>
+    <ng-select [(ngModel)]="reserva.currentAluno" name="aluno" placeholder="Aluno">
+      <ng-option *ngFor="let aluno of alunos" [value]="aluno">{{aluno.nome}}</ng-option>
+    </ng-select>
+    <ng-select [(ngModel)]="reserva.currentLivro" name="livro" placeholder="Livro">
+      <ng-option *ngFor="let livro of livros" [value]="livro">{{livro.nome}}</ng-option>
+    </ng-select>
+    <ion-button (click)="cadastrarReserva()">Cadastrar</ion-button>
+  </form>
+</ion-content>
+
+
