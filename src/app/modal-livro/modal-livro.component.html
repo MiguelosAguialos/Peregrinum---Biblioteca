@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>{{data2.nome_livro}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="itemInfo" fill="solid">
+    <ion-label>Nome: </ion-label>
+    <ion-input placeholder="{{data2.nome_livro}}" [(ngModel)]="data2.nome_livro"></ion-input>
+  </ion-item>
+  <ion-item class="itemInfo" fill="solid">
+    <ion-label>Autor: </ion-label>
+    <ion-input placeholder="{{data2.author}}" [(ngModel)]="data2.author"></ion-input>
+  </ion-item>
+  <ion-item class="itemInfo" fill="solid">
+    <ion-label>Tema: </ion-label>
+    <ion-input placeholder="{{data2.assunto}}" [(ngModel)]="data2.assunto"></ion-input>
+  </ion-item>
+  <ion-button id="editar" (click)="confirmarEdicao()">Confirmar edições</ion-button>
+</ion-content>

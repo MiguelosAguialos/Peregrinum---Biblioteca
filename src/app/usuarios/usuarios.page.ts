@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { NgxMaskModule } from 'ngx-mask';
-import { DatePipe } from '@angular/common';
 import { UsuarioService } from 'src/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -12,8 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './usuarios.page.html',
   styleUrls: ['./usuarios.page.scss'],
   standalone: true,
-  providers: [DatePipe],
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, NgxMaskModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class UsuariosPage implements OnInit {
   usuariosForm!: FormGroup
@@ -45,6 +42,16 @@ export class UsuariosPage implements OnInit {
   }
 
   cadastrarUsuario(){
+    if(this.usuarios.nome_user == null || this.usuarios.nome_user == "" || this.usuarios.idade == null || this.usuarios.idade == "" || this.usuarios.serie == null || this.usuarios.serie == ""){
+      Swal.fire({
+        position: 'center',
+        heightAuto: false,
+        icon: 'error',
+        title: 'Os campos devem ser preenchidos!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
     this.userService.cadastrarAluno(this.usuarios).subscribe(res => {
       Swal.fire({
         position: 'center',
@@ -58,6 +65,7 @@ export class UsuariosPage implements OnInit {
       this.usuarios.idade = null
       this.usuarios.serie = null
     })
+  }
   }
 
   selecionarSerie(ev: any){

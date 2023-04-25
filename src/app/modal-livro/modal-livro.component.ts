@@ -9,66 +9,36 @@ import { UsuarioService } from 'src/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-modal-user',
-  templateUrl: './modal-user.component.html',
-  styleUrls: ['./modal-user.component.scss'],
+  selector: 'app-modal-livro',
+  templateUrl: './modal-livro.component.html',
+  styleUrls: ['./modal-livro.component.scss'],
   standalone: true,
   providers: [UsuarioService],
   imports: [IonicModule, CommonModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule]
 })
-export class ModalUserComponent  implements OnInit {
+export class ModalLivroComponent  implements OnInit {
+
   @Input() data: any
 
   constructor(public modalController: ModalController, public usuarioService: UsuarioService) { }
-
-  dataReservaUser!: any
+  
   data2!: any
-  displayedColumns = ['id_reserva', 'book_id', 'createdat', 'limitdate', 'status'];
-  dataSource = this.dataReservaUser
-  listaSerie = [
-    {
-      nome: '6 ano'
-    },
-    {
-      nome: '7 ano'
-    },
-    {
-      nome: '8 ano'
-    },
-    {
-      nome: '9 ano'
-    },
-    {
-      nome: '1 ano EM'
-    },
-    {
-      nome: '2 ano EM'
-    },
-    {
-      nome: '3 ano EM'
-    },
-  ]
+  
 
   ngOnInit() {
-    this.usuarioService.reservasUsuario(this.data.user_id).subscribe(res => {
-      console.log(res.body)
-      this.dataReservaUser = res.body
-      this.dataSource = new MatTableDataSource(this.dataReservaUser)
-    })
     this.data2 = this.data
-    console.log(this.data2)
   }
 
   goBack(){
     this.modalController.dismiss(null, 'cancel')
   }
   confirmarEdicao(){
-    this.usuarioService.editarUsuario(this.data2).subscribe(res => {
+    this.usuarioService.editarLivro(this.data2).subscribe(res => {
       Swal.fire({
         position: 'center',
         heightAuto: false,
         icon: 'success',
-        title: 'Usuário editado com sucesso!',
+        title: 'Livro editado com sucesso!',
         showConfirmButton: false,
         timer: 1500
       }).then(() => {
@@ -78,10 +48,7 @@ export class ModalUserComponent  implements OnInit {
         
       })
     })
-    
   }
-  trocaSerie(event: any){
-this.data2.serie = event.target.value.nome
-  }
+ 
 
 }

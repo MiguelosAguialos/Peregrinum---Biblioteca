@@ -27,4 +27,12 @@ export const routes: Routes = [
     path: 'controleusuarios',
     loadComponent: () => import('./controleusuarios/controleusuarios.page').then( m => m.ControleusuariosPage)
   },
+  {
+    path: 'atualizarreserva',
+    loadComponent: () => import('./atualizarreserva/atualizarreserva.page').then( m => m.AtualizarreservaPage)
+  },
+  {
+    path: 'controlelivros',
+    loadComponent: () => import('./controlelivros/controlelivros.page').then( m => m.ControlelivrosPage)
+  },
 ];

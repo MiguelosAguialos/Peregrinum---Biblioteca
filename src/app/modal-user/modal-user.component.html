@@ -3,9 +3,23 @@
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">Cancel</ion-button>
     </ion-buttons>
+    <ion-button slot="end" id="click-trigger-modal">
+      <ion-icon slot="icon-only" name="alert-circle"></ion-icon>
+    </ion-button>
     <ion-title>{{data2.nome_user}}</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-popover trigger="click-trigger-modal" triggerAction="click">
+  <ng-template>
+    <ion-content class="ion-padding">
+      <ion-label style="color: green;">TRUE = Livro em empréstimo</ion-label>
+      <br>
+      <ion-label style="color: red;">FALSE = Livro devolvido</ion-label>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
 <ion-content>
   <ion-item class="itemInfo" fill="solid">
     <ion-label>Nome: </ion-label>

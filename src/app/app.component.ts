@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { UsuarioService } from 'src/services/usuario.service';
@@ -13,12 +13,19 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   imports: [IonicModule, RouterLink, RouterLinkActive, CommonModule, HttpClientModule],
   providers: [UsuarioService, provideAnimations()]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'LIVROS', url: '/livros', icon: 'mail' },
-    { title: 'USUARIOS', url: '/usuarios', icon: 'paper-plane' },
-    { title: 'RESERVAS', url: '/reservas', icon: 'heart' },
-    { title: 'CONTROLE DE ALUNOS', url: '/controleusuarios', icon: 'heart' },
+    { title: 'CADASTRO LIVRO', url: '/livros', icon: 'book' },
+    { title: 'CADASTRO USUARIO', url: '/usuarios', icon: 'person' },
+    { title: 'CADASTRO RESERVA', url: '/reservas', icon: 'gift' },
+    { title: 'ATUALIZAR RESERVA', url: '/atualizarreserva', icon: 'checkmark-circle' },
+    { title: 'CONTROLE DE ALUNOS', url: '/controleusuarios', icon: 'people' },
+    { title: 'CONTROLE DE LIVROS', url: '/controlelivros', icon: 'library' },
   ];
-  constructor() {}
+  constructor(public userService: UsuarioService) {}
+  ngOnInit() {
+      this.userService.atualizarDebitos().subscribe(res => {
+        console.log(res.body)
+      })
+  }
 }

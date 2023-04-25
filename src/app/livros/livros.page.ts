@@ -17,9 +17,9 @@ export class LivrosPage implements OnInit {
   livrosForm!: FormGroup
 
   livros = {
-    nome_livro: '',
-    author: '',
-    assunto: ''
+    nome_livro: null,
+    author: null,
+    assunto: null
   }
 
   constructor(public formBuilder: FormBuilder, public usuarioService: UsuarioService) { }
@@ -33,6 +33,16 @@ export class LivrosPage implements OnInit {
   }
 
   cadastrarLivro(){
+    if(this.livros.nome_livro == null || this.livros.nome_livro == "" || this.livros.author == null || this.livros.author == "" || this.livros.assunto == null || this.livros.assunto == ""){
+      Swal.fire({
+        position: 'center',
+        heightAuto: false,
+        icon: 'error',
+        title: 'Os campos devem ser preenchidos!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    } else {
     this.usuarioService.cadastrarLivro(this.livros).subscribe(res => {
       Swal.fire({
         position: 'center',
@@ -42,9 +52,10 @@ export class LivrosPage implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
-      this.livros.assunto = ''
-      this.livros.author = ''
-      this.livros.nome_livro = ''
+      this.livros.assunto = null
+      this.livros.author = null
+      this.livros.nome_livro = null
     })
+  }
   }
 }

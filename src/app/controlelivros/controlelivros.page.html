@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-button slot="end" id="click-trigger">
+    <ion-button slot="end" id="click-trigger-livro">
       <ion-icon slot="icon-only" name="alert-circle"></ion-icon>
     </ion-button>
-    <ion-title>Controle de usuários</ion-title>
+    <ion-title>Controle de livros</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-popover trigger="click-trigger" triggerAction="click">
+<ion-popover trigger="click-trigger-livro" triggerAction="click">
   <ng-template>
     <ion-content class="ion-padding">
       <ion-label style="color: green;">TRUE = Disponível</ion-label>
@@ -23,34 +23,30 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">controleusuarios</ion-title>
+      <ion-title size="large">controlelivros</ion-title>
     </ion-toolbar>
   </ion-header>
-  <!-- <mat-form-field appearance="outline">
-    <mat-label>Pesquisar</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Miguel ..." #input>
-  </mat-form-field> -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="user_id">
+    <ng-container matColumnDef="book_id">
       <th mat-header-cell *matHeaderCellDef> ID</th>
-      <td mat-cell *matCellDef="let element"> {{element.user_id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.book_id}} </td>
     </ng-container>
   
    
-    <ng-container matColumnDef="nome_user">
+    <ng-container matColumnDef="nome_livro">
       <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome_user}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.nome_livro}} </td>
     </ng-container>
   
     
-    <ng-container matColumnDef="serie">
-      <th mat-header-cell *matHeaderCellDef> Série </th>
-      <td mat-cell *matCellDef="let element"> {{element.serie}} </td>
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef> Autor </th>
+      <td mat-cell *matCellDef="let element"> {{element.author}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="idade">
-      <th mat-header-cell *matHeaderCellDef> Idade </th>
-      <td mat-cell *matCellDef="let element"> {{element.idade}} </td>
+    <ng-container matColumnDef="assunto">
+      <th mat-header-cell *matHeaderCellDef> Tema </th>
+      <td mat-cell *matCellDef="let element"> {{element.assunto}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -58,13 +54,8 @@
       <td mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
     
-
-    <ng-container matColumnDef="debitos">
-      <th mat-header-cell *matHeaderCellDef> Débitos </th>
-      <td mat-cell *matCellDef="let element"> {{element.debitos}} </td>
-    </ng-container>
-    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getIDclicked(row)"></tr>
   </table>
 </ion-content>
+
