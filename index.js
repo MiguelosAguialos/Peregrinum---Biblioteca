@@ -49,7 +49,7 @@ app.post('/editarLivro', function(req, res){
             if(err){
                 console.log(err)
             } else {
-                res.send({msg: "Livro editado com sucesso!"})
+                
             }
         })
     }
@@ -58,7 +58,7 @@ app.post('/editarLivro', function(req, res){
             if(err){
                 console.log(err)
             } else {
-                res.send({msg: "Livro editado com sucesso!"})
+                
             }
         })
     }
@@ -67,7 +67,7 @@ app.post('/editarLivro', function(req, res){
             if(err){
                 console.log(err)
             } else {
-                res.send({msg: "Livro editado com sucesso!"})
+                
             }
         })
     }
@@ -76,10 +76,11 @@ app.post('/editarLivro', function(req, res){
             if(err){
                 console.log(err)
             } else {
-                res.send({msg: "Livro editado com sucesso!"})
+                
             }
         })
     }
+    res.send({msg: "Livro editado com sucesso!"})
     
 })
 
@@ -107,7 +108,7 @@ app.get('/getUsuarios', function(req, res) {
 
 app.post('/cadastrarUsuario', function(req, res){
     const corpoUsuario = req.body
-    client.query(`INSERT INTO usuario VALUES(default, '${corpoUsuario.nome_user}', '${corpoUsuario.serie}', '${corpoUsuario.idade}', true)`, (err, resQuery) => {
+    client.query(`INSERT INTO usuario VALUES(default, '${corpoUsuario.nome_user}', '${corpoUsuario.serie}', '${corpoUsuario.idade}', true, 0)`, (err, resQuery) => {
         if(err){
             console.log(err)
         } else {
@@ -373,7 +374,7 @@ app.get('/livrosDisponiveis', function(req, res){
 })
 
 app.get('/usuariosDisponiveis', function(req, res){
-    client.query("SELECT * FROM usuario WHERE status = true", (err, resQuery) => {
+    client.query("SELECT * FROM usuario WHERE status = true AND debitos<=0", (err, resQuery) => {
         if(err){
             console.log(err)
         } else {
@@ -433,8 +434,14 @@ app.post('/livroAtivoReserva', function(req, res) {
     
 })
 
-app.post('/debitosUsuario', function(req, res){
-    const corpoReserva = req.body
+app.get('/debitosUsuario', function(req, res){
+
+    client.query("SELECT user_id FROM usuario WHERE status = false", (err, resQuery) => {
+        if(err){
+            console.log(err)
+        } else {
+            let tamanho = resQuery.rows.length
+            for(let g = 0; g<=tamanho-1; g++){
     var divida = 0  
     const dataAtual = new Date()
     // const ano = dataAtual.getFullYear()
@@ -442,29 +449,34 @@ app.post('/debitosUsuario', function(req, res){
     // const dia = ("0" + dataAtual.getDate()).slice(-2)
 
     // const dataFormatada = ano + "-" + mes + "-" + dia;
-    client.query(`SELECT limitdate FROM reserva WHERE user_id = ${corpoReserva.user_id} AND status = true`, (err, resQuery) => {
+    client.query(`SELECT limitdate FROM reserva WHERE user_id = ${resQuery.rows[g].user_id} AND status = true`, (err, resQuery1) => {
         if(err){
             console.log(err)
         } else {
-            for(let i=0; i<=resQuery.rows.length -1; i++){
-                if (dataAtual > resQuery.rows[i].limitdate){
-                    let diffInMilliseconds = Math.abs(dataAtual - resQuery.rows[i].limitdate);
+            for(let i=0; i<=resQuery1.rows.length -1; i++){
+                if (dataAtual > resQuery1.rows[i].limitdate){
+                    let diffInMilliseconds = Math.abs(dataAtual - resQuery1.rows[i].limitdate);
                     let diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
-                    console.log(diffInDays)
-                    divida = divida + diffInDays
+                    divida = diffInDays
                 } else {
                     divida = divida + 0
                 }              
             }
-            client.query(`UPDATE usuario SET debitos = '${divida}' WHERE user_id=${corpoReserva.user_id}`, (err, resQuery) => {
+            client.query(`UPDATE usuario SET debitos = '${divida}' WHERE user_id=${resQuery.rows[g].user_id}`, (err, resQuery2) => {
                 if(err){
                     console.log(err)
                 } else {
-                    res.send({msg: "Dívidas atualizadas com sucesso!"})
+                    divida = 0
                 }
             })
         }
     })
+            }
+            res.send({msg: "Dívidas atualizadas com sucesso!"})
+        }
+    })
+    
+    
 
 })
 
