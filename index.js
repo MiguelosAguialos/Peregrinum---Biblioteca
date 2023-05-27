@@ -2,13 +2,7 @@ const express = require('express')
 const app = express()
 const {Client} = require('pg')
 const cors = require('cors')
-const client = new Client({
-    host: 'localhost',
-    port: '5432',
-    database: 'peregrinum_db',
-    user: 'postgres',
-    password: '12345678'
-})
+const client = new Client({connectionString: "postgres://default:Zl8U5qCjNeGw@ep-tight-mouse-484856-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb?sslmode=require"})
 client.connect((err) => {
     if(err){
         console.log("Erro ao tentar conectar ao banco!", err.stack)
