@@ -8,45 +8,45 @@ export class UsuarioService {
     constructor(public http: HttpClient){}
 
     getUsuarios(){
-       return this.http.get(`http://localhost:3000/getUsuarios`, {
+       return this.http.get(`https://relieved-crow-fatigues.cyclic.app/getUsuarios`, {
         observe: 'response',
         responseType: 'json'
        })
     }
     getLivros(){
-        return this.http.get(`http://localhost:3000/getLivros`, {
+        return this.http.get(`https://relieved-crow-fatigues.cyclic.app/getLivros`, {
          observe: 'response',
          responseType: 'json'
         })
      }
     reservasUsuario(id: any){
-        return this.http.post(`http://localhost:3000/reservasUsuario`, {user_id: id}, {
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/reservasUsuario`, {user_id: id}, {
             observe: 'response',
             responseType: 'json'
         })
     }
     editarUsuario(info: any){
         console.log(info)
-        return this.http.post(`http://localhost:3000/editarUsuario`, info, {
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/editarUsuario`, info, {
             observe: 'response',
             responseType: 'json'
         })
     }
     editarLivro(info: any){
         console.log(info)
-        return this.http.post(`http://localhost:3000/editarLivro`, info, {
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/editarLivro`, info, {
             observe: 'response',
             responseType: 'json'
         })
     }
     getUsuariosIndisponiveis(){
-        return this.http.get(`http://localhost:3000/usuariosIndisponiveis`,{
+        return this.http.get(`https://relieved-crow-fatigues.cyclic.app/usuariosIndisponiveis`,{
             observe: 'response',
             responseType: 'json'
         })
     }
     reservasAtivasUsuarios(info: any){
-        return this.http.post(`http://localhost:3000/reservasAtivasUsuario`,{
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/reservasAtivasUsuario`,{
             user_id: info
         },{
             observe: 'response',
@@ -54,37 +54,37 @@ export class UsuarioService {
         })
     }
     cadastrarLivro(info: any){
-        return this.http.post(`http://localhost:3000/cadastrarLivro`,info,{
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/cadastrarLivro`,info,{
             observe: 'response',
             responseType: 'json'
         })
     }
     cadastrarAluno(info: any){
-        return this.http.post(`http://localhost:3000/cadastrarUsuario`,info,{
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/cadastrarUsuario`,info,{
             observe: 'response',
             responseType: 'json'
         })
     }
     getUsuariosDisponiveis(){
-        return this.http.get(`http://localhost:3000/usuariosDisponiveis`,{
+        return this.http.get(`https://relieved-crow-fatigues.cyclic.app/usuariosDisponiveis`,{
             observe: 'response',
             responseType: 'json'
         })
     }
     getLivrosDisponiveis(){
-        return this.http.get(`http://localhost:3000/livrosDisponiveis`,{
+        return this.http.get(`https://relieved-crow-fatigues.cyclic.app/livrosDisponiveis`,{
             observe: 'response',
             responseType: 'json'
         })
     }
     cadastrarReserva(info: any){
-        return this.http.post(`http://localhost:3000/cadastrarReserva`,info,{
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/cadastrarReserva`,info,{
             observe: 'response',
             responseType: 'json'
         })
     }
     concluirReserva(info: any){
-        return this.http.post(`http://localhost:3000/concluirReserva`,{
+        return this.http.post(`https://relieved-crow-fatigues.cyclic.app/concluirReserva`,{
             id_reserva: info
         },{
             observe: 'response',
@@ -92,7 +92,7 @@ export class UsuarioService {
         }) 
     }
     atualizarDebitos(){
-        return this.http.get(`http://localhost:3000/debitosUsuario`, {
+        return this.http.get(`https://relieved-crow-fatigues.cyclic.app/debitosUsuario`, {
             observe: 'response',
             responseType: 'json'
         })
