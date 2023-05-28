@@ -8,6 +8,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table'
 import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatInputModule} from '@angular/material/input'
 import { ModalUserComponent } from '../modal-user/modal-user.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-controleusuarios',
@@ -24,10 +25,22 @@ modal!: HTMLIonModalElement
 dataSource!: MatTableDataSource<any>
 
 ngOnInit() {
+  Swal.fire({
+    title: "Carregando...",
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    heightAuto: false,
+    showConfirmButton: false,
+    didOpen(popup){
+      Swal.showLoading()
+    }
+  })
+
   this.usuarioService.getUsuarios().subscribe(res => {
     if (res != null){
       this.data = res.body
       this.dataSource = new MatTableDataSource(this.data)
+      Swal.close()
     }
   })
 }

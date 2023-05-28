@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { UsuarioService } from 'src/services/usuario.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { ModalLivroComponent } from '../modal-livro/modal-livro.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-controlelivros',
@@ -24,10 +25,22 @@ modal!: HTMLIonModalElement
 dataSource!: MatTableDataSource<any>
 
 ngOnInit() {
+  Swal.fire({
+    title: "Carregando...",
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    heightAuto: false,
+    showConfirmButton: false,
+    didOpen(popup){
+      Swal.showLoading()
+    }
+  })
+
   this.usuarioService.getLivros().subscribe(res => {
     if (res != null){
       this.data = res.body
       this.dataSource = new MatTableDataSource(this.data)
+      Swal.close()
     }
   })
 }
