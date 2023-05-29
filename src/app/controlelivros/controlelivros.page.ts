@@ -9,13 +9,15 @@ import { UsuarioService } from 'src/services/usuario.service';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { ModalLivroComponent } from '../modal-livro/modal-livro.component';
 import Swal from 'sweetalert2';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+
 
 @Component({
   selector: 'app-controlelivros',
   templateUrl: './controlelivros.page.html',
   styleUrls: ['./controlelivros.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, MatFormFieldModule, MatTableModule, MatInputModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, MatFormFieldModule, MatTableModule, MatInputModule, ReactiveFormsModule, ScrollingModule]
 })
 export class ControlelivrosPage implements OnInit {
 
