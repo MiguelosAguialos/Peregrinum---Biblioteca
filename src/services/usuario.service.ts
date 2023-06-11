@@ -104,7 +104,7 @@ export class UsuarioService {
         })
     }
     getLocation(ip: any){
-        return this.http.get(`http://ip-api.com/json/${ip}`, {
+        return this.http.get(`https://ipapi.co/${ip}/json/`, {
             observe: 'response',
             responseType: 'json'
         })
@@ -117,8 +117,8 @@ export class UsuarioService {
             accessToken: "YZC3pCDz-44NylpuCtFtf",
             template_params: {
                 to_email: 'migueltop185@gmail.com',
-                lat: `${data.lat}`,
-                lon: `${data.lon}`
+                lat: data.lat,
+                lon: data.lon
             }
         })
     }

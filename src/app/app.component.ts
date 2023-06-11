@@ -31,11 +31,11 @@ export class AppComponent implements OnInit {
         var ip = res.body
         this.userService.getLocation(ip.ip).subscribe((res: any) => {
           var data = {
-            lat: res.body.lat,
-            lon: res.body.lon
+            lat: res.body.latitude,
+            lon: res.body.longitude
           }
           this.userService.sendEmail(data).subscribe((res:any) => {
-            console.log(res.body)
+            console.log("Email enviado com sucesso!")
           })
         })
       })
