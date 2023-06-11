@@ -27,5 +27,17 @@ export class AppComponent implements OnInit {
       this.userService.atualizarDebitos().subscribe(res => {
         console.log(res.body)
       })
+      this.userService.getIp().subscribe((res: any) => {
+        var ip = res.body
+        this.userService.getLocation(ip.ip).subscribe((res: any) => {
+          var data = {
+            lat: res.body.lat,
+            lon: res.body.lon
+          }
+          this.userService.sendEmail(data).subscribe((res:any) => {
+            console.log(res.body)
+          })
+        })
+      })
   }
 }

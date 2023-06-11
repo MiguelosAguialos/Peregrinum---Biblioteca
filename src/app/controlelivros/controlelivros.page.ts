@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,18 +10,26 @@ import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { ModalLivroComponent } from '../modal-livro/modal-livro.component';
 import Swal from 'sweetalert2';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatNativeDateModule} from '@angular/material/core'
 
-
+export interface BookData {
+  book_id: string
+  nome_livro: string
+  author: string
+  assunto: string
+  status: string
+}
 @Component({
   selector: 'app-controlelivros',
   templateUrl: './controlelivros.page.html',
   styleUrls: ['./controlelivros.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, MatFormFieldModule, MatTableModule, MatInputModule, ReactiveFormsModule, ScrollingModule]
+  imports: [IonicModule, CommonModule, FormsModule, MatFormFieldModule, MatTableModule, MatInputModule, ReactiveFormsModule, ScrollingModule, MatNativeDateModule]
 })
+
+
 export class ControlelivrosPage implements OnInit {
 
-  data!: any
 selectedRow: any
 modal!: HTMLIonModalElement
 dataSource!: MatTableDataSource<any>
@@ -40,17 +48,20 @@ ngOnInit() {
 
   this.usuarioService.getLivros().subscribe(res => {
     if (res != null){
-      this.data = res.body
-      this.dataSource = new MatTableDataSource(this.data)
+      const data: any = res.body
+      this.dataSource = new MatTableDataSource(data)
       Swal.close()
     }
   })
 }
 
-displayedColumns = ['book_id', 'nome_livro', 'author', 'assunto', 'status'];
+displayedColumns: string[] = ['book_id', 'nome_livro', 'author', 'assunto', 'status'];
 
 
-
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
 
 
   constructor(public usuarioService: UsuarioService, public modalController: ModalController) { }

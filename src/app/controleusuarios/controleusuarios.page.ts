@@ -25,6 +25,7 @@ modal!: HTMLIonModalElement
 dataSource!: MatTableDataSource<any>
 
 ngOnInit() {
+
   Swal.fire({
     title: "Carregando...",
     allowEscapeKey: false,
