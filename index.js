@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const {Client} = require('pg')
 const cors = require('cors')
-const client = new Client({connectionString: "postgres://MiguelosAguialos:IKUXQDCL6Wn1@ep-proud-haze-821865.us-east-2.aws.neon.tech/neondb"})
+const client = new Client({connectionString: "postgres://MiguelosAguialos:IKUXQDCL6Wn1@ep-proud-haze-821865.us-east-2.aws.neon.tech/neondb?sslmode=require"})
 client.connect((err) => {
     if(err){
         console.log("Erro ao tentar conectar ao banco!", err.stack)
