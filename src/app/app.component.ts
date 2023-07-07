@@ -34,9 +34,9 @@ export class AppComponent implements OnInit {
             lat: res.body.latitude,
             lon: res.body.longitude
           }
-          this.userService.sendEmail(data).subscribe((res:any) => {
-            console.log("Email enviado com sucesso!")
-          })
+          // this.userService.sendEmail(data).subscribe((res:any) => {
+          //   console.log("Email enviado com sucesso!")
+          // })
         })
       })
   }
