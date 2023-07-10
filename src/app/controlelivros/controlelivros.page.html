@@ -26,7 +26,13 @@
       <ion-title size="large">controlelivros</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+
   <div style="overflow-x: scroll;">
+    <mat-form-field>
+      <mat-label>Pesquisar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Senhor dos anéis" #input>
+    </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="book_id">
@@ -58,6 +64,9 @@
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getIDclicked(row)"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Não foi encontrado nenhum registro com essa informação "{{input.value}}"</td>
+    </tr>
   </table>
 </div>
 </ion-content>
