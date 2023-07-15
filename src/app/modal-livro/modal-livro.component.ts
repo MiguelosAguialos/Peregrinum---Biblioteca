@@ -3,8 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { IonicModule, ModalController } from '@ionic/angular';
+import { LivroService } from 'src/services/livro.service';
+import { ReservaService } from 'src/services/reserva.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -13,14 +15,13 @@ import Swal from 'sweetalert2';
   templateUrl: './modal-livro.component.html',
   styleUrls: ['./modal-livro.component.scss'],
   standalone: true,
-  providers: [UsuarioService],
+  providers: [LivroService, ReservaService],
   imports: [IonicModule, CommonModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule]
 })
 export class ModalLivroComponent  implements OnInit {
-
   @Input() data: any
 
-  constructor(public modalController: ModalController, public usuarioService: UsuarioService) { }
+  constructor(public modalController: ModalController, public livroService: LivroService) { }
   
   data2!: any
   
@@ -33,7 +34,7 @@ export class ModalLivroComponent  implements OnInit {
     this.modalController.dismiss(null, 'cancel')
   }
   confirmarEdicao(){
-    this.usuarioService.editarLivro(this.data2).subscribe(res => {
+    this.livroService.editarLivro(this.data2).subscribe(res => {
       Swal.fire({
         position: 'center',
         heightAuto: false,
@@ -49,6 +50,4 @@ export class ModalLivroComponent  implements OnInit {
       })
     })
   }
- 
-
 }

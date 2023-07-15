@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { ReservaService } from 'src/services/reserva.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { ModalReservaComponent } from '../modal-reserva/modal-reserva.component';
 
@@ -9,14 +8,13 @@ import { ModalReservaComponent } from '../modal-reserva/modal-reserva.component'
   selector: 'app-atualizarreserva',
   templateUrl: './atualizarreserva.page.html',
   styleUrls: ['./atualizarreserva.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class AtualizarreservaPage implements OnInit {
 
+  
   modal!: HTMLIonModalElement
   usuarios!: any
-  constructor(public userService: UsuarioService, public modalController: ModalController) { }
+  constructor(public userService: UsuarioService, public modalController: ModalController, reservaService: ReservaService) { }
 
   ngOnInit() {
     this.userService.getUsuariosIndisponiveis().subscribe(res => {

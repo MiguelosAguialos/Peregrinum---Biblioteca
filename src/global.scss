@@ -17,6 +17,8 @@ $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The "warn" palette is optional and defaults to red if not specified.
 $my-warn: mat.define-palette(mat.$red-palette);
+
+/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -31,4 +33,3 @@ $my-warn: mat.define-palette(mat.$red-palette);
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import "~@ng-select/ng-select/themes/default.theme.css";
